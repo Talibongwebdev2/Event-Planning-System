@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('LMList', '0001_initial'),
+        ('CEList', '0001_initial'),
     ]
 
     operations = [

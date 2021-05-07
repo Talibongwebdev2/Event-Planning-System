@@ -1,0 +1,135 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Warranty tracker</title>
+
+
+<style> 
+
+
+h1{
+    padding: 50px;
+    background-color: blue;
+    color: white;
+    margin-top: 0%
+}
+body{
+        font-family:'Roboto';
+        background-color: rgb(247, 247, 247);
+        padding: 0;
+        margin: 0;
+        background-color: yellow;
+}
+
+
+button { 
+
+        width: 30%;
+        color: rgb(0, 0, 0); 
+        padding: 15px; 
+        justify-content: center;
+        border: solid; 
+        cursor: pointer; 
+        }
+
+table {
+	border: solid;
+    margin-bottom: 30px;
+    background-color: white;
+}
+
+td{
+	border: solid 2px;
+    padding: 12px;
+    text-align: left;
+    background-color: white;
+
+} 
+th{
+    border: solid 2px;
+}
+
+ input[type=text], input[type=password] { 
+        width: 100%;
+        margin: 10px 0;
+        padding: 12px 20px; 
+        display: inline-block; 
+        border: 1px solid rgb(3, 3, 3); 
+        box-sizing: border-box; 
+    }
+ button:hover { 
+        background-color: gray;
+    } 
+  .cancelbtn { 
+        width: auto; 
+        padding: 10px 18px;
+        margin: 10px 5px;
+    } 
+      
+ .categories { 
+        padding: 20px; 
+        width: 35%;
+
+        margin: 40px 230px;
+    }
+
+ }
+    
+</style> 
+</head>  
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Original+Surfer&family=Playfair+Display+SC&display=swap" rel="stylesheet">
+
+<body>  
+     <center><h1>Warranty tracker (customer's view)</h1>
+	 <div class="categories">
+
+     <form method="POST" action="/CEList/{{ list.id }}/add_item">
+     
+     <label> Item </label> 
+     <input 
+     type="text" 
+     id="itemn"
+     placeholder="Enter the item name" 
+     name="itemn">
+
+     <label> Price </label> 
+     <input 
+     type="text" 
+     id="pricen"
+     placeholder="Enter the price" 
+     name="pricen" >
+
+     <label> Date </label> 
+     <input 
+     type="text" 
+     id="daten"
+     placeholder="Enter the date" 
+     name="daten" >
+
+
+    {% csrf_token %}
+
+    <button>Continue</button> 
+    </form> 
+	</div> 
+           
+<table id="id_table" name='tr'>
+      
+        <tr><th>Item</th>
+        <th>Price</th>
+        <th>Date</th></tr>
+        <tr>
+       {% for item in list.item_set.all %} <! -- {{ forloop.counter }}:  -->
+        <td>{{ item.nitem }}</td>
+        <td>{{ item.nprice }}</td>
+        <td>{{ item.ndate}}</td>
+          </tr>
+        {% endfor %}
+    </table>
+</center>
+</body>   
+</html>
+
+ 
