@@ -85,28 +85,28 @@ th{
      <center><h1>Warranty tracker (customer's view)</h1>
 	 <div class="categories">
 
-     <form method="POST" action="/CEList/{{ list.id }}/add_item">
+     <form method="POST" action="/CEList/{{ list.id }}/cId">
      
-     <label> Item </label> 
+     <label> Event </label> 
      <input 
      type="text" 
-     id="itemn"
+     id="event_name"
      placeholder="Enter the item name" 
-     name="itemn">
+     name="event_name">
 
-     <label> Price </label> 
+     <label> Venue </label> 
      <input 
      type="text" 
-     id="pricen"
+     id="venue_name"
      placeholder="Enter the price" 
-     name="pricen" >
+     name="venue_name" >
 
      <label> Date </label> 
      <input 
      type="text" 
-     id="daten"
+     id="datentime"
      placeholder="Enter the date" 
-     name="daten" >
+     name="datentime" >
 
 
     {% csrf_token %}

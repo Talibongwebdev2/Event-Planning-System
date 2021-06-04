@@ -30,8 +30,8 @@ class ListViewTest(TestCase):
    
    def test_displays_all_list_items(self):        
        list_ = List.objects.create()        
-       Item.objects.create(nitem='Leonalyn', list=list_)        
-       Item.objects.create(nitem='Maglines', list=list_)
+       Item.objects.create(nitem='Gigabyte', list=list_)        
+       Item.objects.create(nitem='Gigabyte', list=list_)
    
    def test_passes_correct_list_to_template(self):       
        other_list = List.objects.create()        

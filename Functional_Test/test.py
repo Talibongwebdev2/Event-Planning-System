@@ -26,15 +26,15 @@ class PageTest(LiveServerTestCase):
 	 self.browser = webdriver.Firefox()
 
 	def test_browser_title(self):
-	 self.browser.get('http://localhost:8000/')
-	 #self.browser.get(self.live_server_url)
+	# self.browser.get('http://localhost:8000/')
+	 self.browser.get(self.live_server_url)
 	 self.assertIn('Warranty tracker',self.browser.title)
 	 header_text = self.browser.find_element_by_tag_name('h1').text
 	 self.assertIn('Warranty tracker', header_text)
 	 
 	 
 	 
-	
+	'''
 	 inputnamen = self.browser.find_element_by_id('namen')
 	 self.assertEqual(inputnamen.get_attribute('placeholder'),'Enter your fullname')
 	 inputnamen.click()
@@ -51,34 +51,11 @@ class PageTest(LiveServerTestCase):
 	 inputnbirthdate.send_keys('02.24.2000')
 	 time.sleep(1)
 	 
-	 '''
-	 inputitemn = self.browser.find_element_by_id('itemn')
-	 self.assertEqual(inputitemn.get_attribute('placeholder'),'Enter the item name')
-	 inputitemn.click()
-	 time.sleep(1)
-	 inputitemn.send_keys('Gigabyte a320 s2h')
-	 time.sleep(1)
 	 
-	
-	 inputpricen = self.browser.find_element_by_id('pricen')
-	 self.assertEqual(inputpricen.get_attribute('placeholder'),'Enter the price')
-	 inputpricen.click()
-	 time.sleep(1)
-	 inputpricen.send_keys('2850')
-	 time.sleep(1)
-	 
-	 
-	 inputdaten = self.browser.find_element_by_id('daten')
-	 self.assertEqual(inputdaten.get_attribute('placeholder'),'Enter the date')
-	 inputdaten.click()
-	 time.sleep(1)
-	 inputdaten.send_keys('08/22/2013')
-	 time.sleep(1)
-	 '''
 	 btnContinue = self.browser.find_element_by_id('btnContinue')
 	 btnContinue.click()
 	 time.sleep(2)
 	 
-
+'''
 
 	
