@@ -27,7 +27,7 @@ SECRET_KEY = 'fr@^j%v-5oilv2&91fb&t%2+&jci2_2g_rv7905!h5hth1f9)b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cesarevent.ph']
+ALLOWED_HOSTS = ['cps.ph']
 
 
 # Application definition

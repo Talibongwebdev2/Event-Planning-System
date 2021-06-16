@@ -1,31 +1,67 @@
 from django.db import models
 
+DEPARTMENT_CHOICES = (
+    ("Operations" , "operations"),
+    ("Quality Assurance" , "QA"),
+    ("Human Resource" , "HR"),
+    ("Administration" , "Admin"),
+    ("Training" , "training")
+    )
 
-class Customers_Profile(models.Model):
-    customers_name = models.TextField(default='')
-    address = models.TextField(default='')
-    book_date = models.DateTimeField(default='')
-    contact_number = models.TextField(default='')
+BRANCH_CHOICES = (
+    ("Cavite" , "cavite"),
+    ("Manila" , "manila"),
+    ("Caloocan" ,"caloocan" ),
+    ("Taguig" ,"taguig")
+    )
 
-class Booking(models.Model):
-    customers_profile = models.ForeignKey(Customers_Profile, default=None, on_delete=models.CASCADE)
-    event_type = models.TextField(default='')
-    venue = models.TextField(default='')
-    date_time = models.DateTimeField(default='')
+GEN_CHOICES =(
+    ("F" , "Female"),
+    ("M" , "Male"),
+    )
+
+
+class Employee_info(models.Model):
+    Name = models.TextField(default='')
+    Age = models.TextField(default='')
+    Gender = models.TextField( choices = GEN_CHOICES, default='')
+    Address = models.TextField(default='')
+    Birthdate = models.DateTimeField(default='')
+    Contact_No = models.TextField(default='')
+    Emailaddress = models.TextField(default='')
+    Company_id = models.TextField(default='')
+  
+class Employee_Salary(models.Model):
+    employee_info = models.ForeignKey(Employee_info, default=None, on_delete=models.CASCADE)
+    Days = models.TextField(default='')
+    Rate = models.TextField(default='')
+    Deduction = models.TextField(default='')
+    Status = models.TextField(default='')
+    Date_time = models.DateTimeField(default='')
     
-class Event_Guest(models.Model): 
-    booking = models.ForeignKey(Booking, default=None, on_delete=models.CASCADE)
-    guest_names = models.TextField(default='')
+class Branch(models.Model): 
+    employee_info = models.ManyToManyField(Employee_info, default=None)
+    Company_branch = models.CharField(max_length = 20, choices = BRANCH_CHOICES, default ="")
+    Company_address = models.TextField(default='')
 
-class Services(models.Model):
-	booking = models.ForeignKey(Booking, default=None, on_delete=models.CASCADE)
-	services = models.TextField(default='')
 
-class Adds_On(models.Model):
-	booking = models.ForeignKey(Booking, default=None, on_delete=models.CASCADE)
-	additionals = models.TextField(default='')
+class Department(models.Model):
+    employee_info = models.ManyToManyField(Employee_info, default=None)
+    Department = models.CharField(max_length = 20, choices = DEPARTMENT_CHOICES, default ="")
+    Dep_status = models.TextField(default='')
+    Position = models.TextField(default='')
 
-class Budget(models.Model):
-	booking = models.OneToOneField(Booking, default=None, on_delete=models.CASCADE)
-	budget = models.TextField(default='')
-	
+class Company_report(models.Model):
+    employee_info = models.ForeignKey(Employee_Salary, default=None, on_delete=models.CASCADE)
+    Companyreport = models.TextField(default='')
+    Company_comment = models.TextField(default='')
+    Comreport_date = models.DateTimeField(default='')
+
+
+class Employee_report(models.Model):
+    employee_info = models.ForeignKey(Employee_info, default=None, on_delete=models.CASCADE)
+    Employeereport = models.TextField(default='')
+    Employee_comment = models.TextField(default='')
+    Company_rating = models.TextField(default='')
+    Empreport_date = models.DateTimeField(default='')
+

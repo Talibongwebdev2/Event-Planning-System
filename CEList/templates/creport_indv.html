@@ -25,10 +25,12 @@ body{
         margin: 0;
         background: fixed;
         background-size: cover;
-        background-attachment: ;
-
+        overflow-x: hidden;
         
 
+
+}
+.bigtxt{
 
 }
 .head {
@@ -69,7 +71,18 @@ button {
         font-size: 20px;
         }
 
- } 
+  
+
+     button{
+      background-color: #063247;
+        color: white;
+    }
+    button:hover { 
+        color: lightblue;
+        transition:.50s all ease;
+    } 
+
+
 td{
     padding: 12px;
     text-align: left;
@@ -85,9 +98,7 @@ td{
         border: 1px solid rgb(3, 3, 3); 
         box-sizing: border-box; 
     }
- button:hover { 
-        background-color: gray;
-    } 
+
 
     nav{
     position: relative;
@@ -95,9 +106,15 @@ td{
     width: 100%
     height: 50px;
     background: #34495e;
+
     
     font-size: 0;
     box-shadow: 0 2px 3px 0 rgba(0,0,0,.1);
+}
+
+input{
+
+  padding: 20px;
 }
 
 nav .logo{
@@ -145,6 +162,7 @@ nav ul li:hover > ul{
   opacity: 1;
   visibility: visible;
   transition: .3s linear;
+  position: absolute;
 }
 nav ul ul li{
   width: 150px;
@@ -170,6 +188,10 @@ nav ul ul li a i{
 
 }
 
+textarea{
+  border: 2px solid black;
+}
+
 .show-btn{
     background: #fff;
     padding:  10px 20px;
@@ -182,34 +204,44 @@ nav ul ul li a i{
 
 }
 
-.show-btn:hover{
-  color: lightblue;
+.btnsub{
+  color: blueviolet;
+  text-align: right;
+
+}
+.btnsub submit{
+  color: red;
 }
 
-#show:checked ~ .categories{
-    display: block;
-}
 
 
-.show-btn, .container{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 input[type="checkbox"]{
   display: none;
 }
 .container{
-  display: none;
   background: #fff;
   width: 60%;
   padding: 40px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   margin-top: 100px;
-  box-shadow: 10px 20px 20px rgba(0,0,0,0.5)
+  box-shadow: 10px 20px 20px rgba(0,0,0,0.5);
+  width: 50%;
+  margin-left:21%;
 
 }
+.container table{
+  width: 100%;
+    border: 3px solid;
+
+}
+
+.container th,td{
+  margin: auto;
+  padding: 20px;
+  border: 2px solid;
+}
+
 #show:checked ~ .container{
   display: block;
 }
@@ -223,11 +255,9 @@ input[type="checkbox"]{
   top: 15px;
   font-size: 18px;
   cursor: pointer;
-  position: absolute;
-
 }
 .container .close-btn:hover{
-  color: red;
+  color: #3498db;
 }
 .container .text{
   font-size: 35px;
@@ -238,18 +268,59 @@ input[type="checkbox"]{
 
 }
 
-.container .text:hover{
-  color: black;
-}
-
 
 .container form{
-  margin-top: -20px;
+  margin-top: 20px;
 }
 .container form .data{
   height: 45px;
   width: 100%;
   margin: 40px 0;
+}
+select {
+   -webkit-appearance:none;
+   -moz-appearance:none;
+   -ms-appearance:none;
+   appearance:none;
+   outline:0;
+   box-shadow:none;
+   border:0!important;
+   background: white;
+   background-image: none;
+   flex: 1;
+   padding: 0 .5em;
+   color:black;
+   cursor:pointer;
+   font-size: 1em;
+   font-family: 'Open Sans', sans-serif;
+}
+select::-ms-expand {
+   display: none;
+}
+.select {
+   position: relative;
+   display: flex;
+   width: 15em;
+   height: 3em;
+   line-height: 3;
+   background: white;
+   overflow: hidden;
+   
+   border: 2px solid black;
+}
+.select::after {
+   content: '\25BC';
+   position: absolute;
+   top: 0;
+   right: 0;
+   padding: 0 1em;
+   background: white;
+   cursor:pointer;
+   pointer-events:none;
+   transition:.25s all ease;
+}
+.select:hover::after {
+   color: #063247;
 }
 form .data label{
   font-size: 18px;
@@ -291,7 +362,6 @@ form .btn .inner{
   background: #34495e;
   transition: all 0.4s;
 }
-
 form .btn:hover .inner{
   left: 0;
 }
@@ -307,10 +377,7 @@ form .btn button{
   letter-spacing: 1px;
   cursor: pointer;
 }
-
-form .btn button:hover{
- color: lightblue;
-}
+ </style>
 </style> 
 
 
@@ -356,65 +423,115 @@ form .btn button:hover{
    <body style="background-image:url('{% static "image/1.jpg"%}');">
 
       <div class="center">
-         <input type="checkbox" id="show">
-         <label for="show" class="show-btn">New Employee</label>
 
-         <div class="head">
-         <h1>Company Payroll System<h1>
-          <h5>To create a new CPS employee press the button below:</h5></div>
+
 
          <div class="container">
-            <label for="show" class="close-btn fas fa-times" title="close">&#x2715;</label>
+
             <div class="text">
-               <h3>New employee</h3>
+               <h3>Company individual report</h3>
             </div>
+            Name:<br><br>
+            Company Id:<br><br>
+            Department:<br><br>
             <form action="#">
-               <label>Name </label> 
+
+            <div class="bigtxt">
+              <label>Report </label> <br>
+
+            <textarea 
+            name="comreport" 
+            rows ="5" 
+            cols ="50" 
+            placeholder="Enter the company report"></textarea>
+               
+             
+
+            <br>
+            <br>
+
+            <label>Company comment<br></label> 
+            <textarea 
+            name="comcomment" 
+            rows ="5" 
+            cols ="50" 
+            placeholder="Enter the company comment"></textarea><br><br>
+
+             Company Branch
+            <div class="select">
+              <select name="depstatus" id="compbranch">
+              <option selected disabled="">Select here</option>
+              <option value="Cavite">Cavite</option>
+              <option value="Manila">Manila</option>
+              <option value="Caloocan">Caloocan</option>
+              <option value="Taguig">Taguig</option>
+
+              </select>
+            </div>
+            <br>
+            <label>Date <br></label> 
             <input 
-            type="text" 
-            id="custom_name" 
-            placeholder="Enter your fullname" 
-            name="Enter the name"><br>
+            type="date" id="date-set" 
+            id="creportdate" 
+            placeholder="Date" 
+            name="creportdate"><br>
+            <br>
+            <div class="btnsub">
+            <br>
+           
+            <br>
+            <button type="submit">Submit</button>
+            </div>
 
 
-            <label>Contact number </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
-            placeholder="Enter your contact number" 
-            name="contact_num"><br>
+            <br><br>
+            <h3>Employee report history</h3>
 
-            <label>Email address </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
-            placeholder="Enter your email address" 
-            name="contact_num"><br>
+            <table id="Salaryltable" name=tr>
 
-            <label>Company ID </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
-            placeholder="Enter your company ID" 
-            name="contact_num"><br>
-            
-            <label>Department </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
-            placeholder="Enter your department" 
-            name="contact_num"><br>
+        <tr>
+        <th>Date</th>
+        <th>Company report</th>
+        <th>Company comment</th>
+        <th>Company branch</th>
+
+        <tr>
+        <td>sample</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>sample</td>
+
+        </tr>
+         <tr>
+        <td>sample</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>sample</td>
+        </tr>
+
+            <form action="#">
+            </div>
+
+           
+            <br>
+
+         
 
 
-               <div class="btn">
-                  <div class="inner"></div>
-                  <button type="submit">Submit</button>
-               </div>
+ 
 
             </form>
          </div>
       </div>
    </body>
+   <script>
+       var date = new Date();
+       var year = date.getFullYear();
+       var month = date.getMonth()+1;
+       var todayDate = String(comrepdate.getDate()).padStart(2,'0');
+       var datePattern = year + '-' + month + '-' + todayDate;
+       document.getElementById("date-set").value = datePattern;
+   </script>
 </html>
 
  

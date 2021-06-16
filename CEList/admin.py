@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Customers_Profile, Booking, Event_Guest, Services, Adds_On, Budget
+from .models import Employee_info, Employee_Salary, Branch, Department, Employee_report, Company_report
 
 
-admin.site.register(Customers_Profile)
-admin.site.register(Booking)
-admin.site.register(Event_Guest)
-admin.site.register(Services)
-admin.site.register(Adds_On)
-admin.site.register(Budget)
+admin.site.register(Employee_info)
+admin.site.register(Employee_Salary)
+admin.site.register(Branch)
+admin.site.register(Department)
+admin.site.register(Company_report)
+admin.site.register(Employee_report)

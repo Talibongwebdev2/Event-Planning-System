@@ -1,46 +1,61 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from CEList.models import Customers_Profile, Booking, Event_Guest, Services, Adds_On, Budget
+from CEList.models import Employee_info, Employee_Salary, Branch, Department, Company_report, Employee_report
 
 
 def home_page(request):
-    cuslist = Customers_Profile.objects.all()
+    cuslist = Employee_info.objects.all()
     return render(request, 'homepage.html', {'cuslist':cuslist})
 
 def booking_view(request, cId):
-    cusId = Customers_Profile.objects.get(id=cId)
-    Booking.objects.create(customers_profile=cusId,event_type=request.POST['event_name'],venue=request.POST['venue_name'],date_time=request.POST['datentime'])
+    #cusId = Customers_Profile.objects.get(id=cId)
+    #Booking.objects.create(customers_profile=cusId,event_type=request.POST['event_name'],venue=request.POST['venue_name'],date_time=request.POST['datentime'])
     return redirect(f'/CEList/{cusId.id}/')  
 
 
-def events_page(request, cId):
-    cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'eventsview.html', {'cusId': cusId})
+#def salary_page(request, cId):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    #return render(request, 'eventsview.html', {'cusId': cusId})
 
+def payroll_list(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'Payroll.html')
+
+def salary_page(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'salary.html')
 
 def custom_view(request):
-    cusProfile = Customers_Profile.objects.create( customers_name=request.POST['custom_name'],address=request.POST['custom_add'],book_date =request.POST['booking_date'],contact_number =request.POST['contact_num'])
+    #cusProfile = Customers_Profile.objects.create( customers_name=request.POST['custom_name'],address=request.POST['custom_add'],book_date =request.POST['booking_date'],contact_number =request.POST['contact_num'])
     return redirect(f'/CEList/{cusProfile.id}/')
 
-'''
-def guest_view(request, list_id):
-    eventId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'guest.html', {'customers_profile': cusId})
+def employee_page(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'Employeeinfo.html')
 
-def third_model(request):
-    eventId = booking.objects.get(id=cId)
-    #Event_Guest.objects.create(booking=eventId,guest_names=request.POST['guest_name'], 'booking': eventId)
-    return redirect(f'/CEList/{eventId.id}/')
+def employee_list(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'emp_list.html')
 
-def services_view(request, list_id):
-    eventId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'guest.html', {'customers_profile': cusId})
+def comp_report(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'company_report.html')
 
-def fourth_model(request):
-    eventId = booking.objects.get(id=cId)
-    #Event_Guest.objects.create(booking=eventId,guest_names=request.POST['guest_name'], 'booking': eventId)
-    return redirect(f'/CEList/{eventId.id}/')
-'''
+def comp_report_indv(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'creport_indv.html')
+
+def emp_report(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'employee_report.html')
+
+def emp_report_indv(request):
+    #cusId = Customers_Profile.objects.get(id=cId)
+    return render(request, 'empreportindv.html')
+
+
+
+
 '''
 def defaultEntry(request):
 	#Creating data
