@@ -323,7 +323,7 @@ form .btn button{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -331,7 +331,7 @@ form .btn button{
                <ul>
                   <li><a href="/emplist">Employee Status</a></li>
                   <li><a href="/paylist">Salary base</a></li>
-                  <li><a href="#">Employee report</a></li>
+                  <li><a href="/emprep">Employee report</a></li>
                </ul>
             </li>
             <li>
@@ -343,33 +343,27 @@ form .btn button{
                   <li><a href="/report">Company report</a></li>
                   <li>
                      <a href="#">Others
-                     <i class="t"></i>
-                     </a>
-                     <ul>
-                        <li><a href="#">Links</a></li>
-                        <li><a href="#">Works</a></li>
-                        <li><a href="#">Status</a></li>
-                     </ul>
+
                   </li>
                </ul>
             </li>
             <li>
                <a href="#">About
-               <i class="fas fa-caret-down"></i>
+               <i class=""></i>
                </a>
             </li>
             <li>
-              <
+              
             </li>
->
+
          </ul>
       </nav>
 </head>  
-   <body style="background-image:url('{% static "image/1.jpg"%}');">
+      <body style="background-image:url(https://www.intheblack.com/-/media/intheblack/allimages/sponsored-content/2018/dexus-office-space.jpg?rev=835b5eb0fcd5481b960b7abfeec3eed2);">
 
       <div class="center">
 
-
+  
 
          <div class="container">
 
@@ -382,35 +376,24 @@ form .btn button{
             <form action="#">
 
 
+<table id="Empltable" name=tr>
 
-            <table id="Empltable" name=tr>
-
-        <tr>
-        <th>ID</th>
+        <tr> 
+        <th>Company ID</th>
         <th>Name</th>
-        <th>Company Id</th>
-        <th>Department</th>
+        <th>Contact number</th>
+      </tr>
 
-        <tr>
-        <td><a href="/salary">1</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
+       {% for employee_info in employee_info %}
+        <tr> 
 
-        </tr>
-         <tr>
-        <td><a href="/salary">2</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
-         <tr>
-        <td><a href="/salary">3</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
- 
+        <td><a href=/CEList/empsalary/{{employee_info.id}}>{{employee_info.Company_id}}</a></td>
+        <td>{{employee_info.Name.upper}}</td>
+        <td>{{employee_info.Contact_No.upper}}</td>
+        
+
+        </tr> {% endfor %}
+      </table>
 
             </form>
          </div>

@@ -384,7 +384,7 @@ form .btn button{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -420,7 +420,7 @@ form .btn button{
          </ul>
       </nav>
 </head>  
-   <body style="background-image:url('{% static "image/1.jpg"%}');">
+      <body style="background-image:url(https://www.intheblack.com/-/media/intheblack/allimages/sponsored-content/2018/dexus-office-space.jpg?rev=835b5eb0fcd5481b960b7abfeec3eed2);">
 
       <div class="center">
 
@@ -431,11 +431,12 @@ form .btn button{
             <div class="text">
                <h3>Company individual report</h3>
             </div>
-            Name:<br><br>
-            Company Id:<br><br>
-            Department:<br><br>
-            <form action="#">
-
+            Name: {{companyreport.Name.upper}} <br><br>
+            Company Id: {{companyreport.Company_id.upper}} <br><br>
+            Department: {{branch.Department.upper}} <br><br> 
+            Position: {{branch.Position.upper}} <br><br>   
+            <form action="/CEList/comrep/{{companyreport.id}}/comrep_add" method="POST">
+            {% csrf_token %} 
             <div class="bigtxt">
               <label>Report </label> <br>
 
@@ -457,17 +458,7 @@ form .btn button{
             cols ="50" 
             placeholder="Enter the company comment"></textarea><br><br>
 
-             Company Branch
-            <div class="select">
-              <select name="depstatus" id="compbranch">
-              <option selected disabled="">Select here</option>
-              <option value="Cavite">Cavite</option>
-              <option value="Manila">Manila</option>
-              <option value="Caloocan">Caloocan</option>
-              <option value="Taguig">Taguig</option>
-
-              </select>
-            </div>
+             
             <br>
             <label>Date <br></label> 
             <input 
@@ -482,7 +473,7 @@ form .btn button{
             <br>
             <button type="submit">Submit</button>
             </div>
-
+          </form>
 
             <br><br>
             <h3>Employee report history</h3>
@@ -491,25 +482,20 @@ form .btn button{
 
         <tr>
         <th>Date</th>
-        <th>Company report</th>
-        <th>Company comment</th>
-        <th>Company branch</th>
+        <th>Company Report</th>
+        <th>Company Comment</th>
 
-        <tr>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
+        {% for Rep in Report %}
+        <tr> 
 
-        </tr>
-         <tr>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
+        <td>{{Rep.Comreport_date}}</td>
+        <td>{{Rep.Companyreport}}</td>
+        <td>{{Rep.Company_comment}}</td>
 
-            <form action="#">
+        </tr> {% endfor %}
+      </tr>
+    </table>
+            
             </div>
 
            
@@ -520,7 +506,7 @@ form .btn button{
 
  
 
-            </form>
+            
          </div>
       </div>
    </body>

@@ -322,7 +322,7 @@ form .btn button{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -358,8 +358,7 @@ form .btn button{
          </ul>
       </nav>
 </head>  
-   <body style="background-image:url('{% static "image/1.jpg"%}');">
-
+      <body style="background-image:url(https://www.intheblack.com/-/media/intheblack/allimages/sponsored-content/2018/dexus-office-space.jpg?rev=835b5eb0fcd5481b960b7abfeec3eed2);">
       <div class="center">
 
 
@@ -369,37 +368,27 @@ form .btn button{
             <div class="text">
                <h3>Company report</h3>
             </div>
-            Company report to to the selected employee's job performances. It can be positive or negative.
+            Company report is to the selected employee's job performances. It can be positive or negative. Please select an employee below.
             <form action="#">
 
 
-            <table id="creport" name=tr>
+           <table id="Empltable" name=tr>
 
-        <tr>
-        <th>ID</th>
+        <tr> 
+        <th>Company ID</th>
         <th>Name</th>
-        <th>Company Id</th>
-        <th>Department</th>
+        <th>Contact number</th>
+      </tr>
 
-        <tr>
-        <td><a href="/indvrep">1</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
+       {% for employee_info in employee_info %}
+        <tr> 
 
-        </tr>
-         <tr>
-        <td><a href="/indvrep">2</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
-         <tr>
-        <td><a href="/indvrep">3</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
+        <td><a href=/CEList/comrep/{{employee_info.id}}/>{{employee_info.Company_id}}</a></td>
+        <td>{{employee_info.Name.upper}}</td>
+        <td>{{employee_info.Contact_No.upper}}</td>
+
+        </tr> {% endfor %}
+      </table>
             <br>
 
          

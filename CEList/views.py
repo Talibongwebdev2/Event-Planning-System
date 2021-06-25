@@ -1,104 +1,134 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from CEList.models import Employee_info, Employee_Salary, Branch, Department, Company_report, Employee_report
+from CEList.models import Employee_info, Employee_Salary, Branch, Company_report, Employee_report
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home_page(request):
-    cuslist = Employee_info.objects.all()
-    return render(request, 'homepage.html', {'cuslist':cuslist})
-
-def booking_view(request, cId):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    #Booking.objects.create(customers_profile=cusId,event_type=request.POST['event_name'],venue=request.POST['venue_name'],date_time=request.POST['datentime'])
-    return redirect(f'/CEList/{cusId.id}/')  
+    EmployeeInfo = Employee_info.objects.all()
+    return render(request, 'homepage.html', {'EmployeeInfo':EmployeeInfo})
 
 
-#def salary_page(request, cId):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    #return render(request, 'eventsview.html', {'cusId': cusId})
+def salary_page(request, EmpSalaryId):
+    Empsalary = Employee_info.objects.get(id=EmpSalaryId)
+    salaries = Employee_Salary.objects.filter(employee_info=EmpSalaryId)
+    branch = Branch.objects.get(employee_branch=EmpSalaryId)
+    return render(request, 'salary.html', {'employee_info': Empsalary, 'salaries': salaries, 'branch': branch})
+
+def salary_add(request, EmpSalaryId):
+    Empsalary = Employee_info.objects.get(id=EmpSalaryId)
+    Employee_Salary.objects.create(Rate=request.POST['rate'],Days=request.POST['days'],Deduction=request.POST['deduct'],Total=request.POST['total'],Date_time=request.POST['salarydate'], employee_info=Empsalary)
+    return redirect(f'/CEList/empsalary/{Empsalary.id}/')
 
 def payroll_list(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'Payroll.html')
+    EmployeeInfo = Employee_info.objects.all()
+    return render(request, 'Payroll.html', {'employee_info':EmployeeInfo})
 
-def salary_page(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'salary.html')
+def new_employee(request):
+    newInfo = Employee_info.objects.create(Name=request.POST['name'],Contact_No=request.POST['contact_num'],Emailaddress=request.POST['email_add'],Age=request.POST['age'],Address=request.POST['address'],Company_id=request.POST['comid'],Gender=request.POST['gender'])
+    return redirect(f'/CEList/branch/{newInfo.id}/')     
 
-def custom_view(request):
-    #cusProfile = Customers_Profile.objects.create( customers_name=request.POST['custom_name'],address=request.POST['custom_add'],book_date =request.POST['booking_date'],contact_number =request.POST['contact_num'])
-    return redirect(f'/CEList/{cusProfile.id}/')
 
 def employee_page(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
     return render(request, 'Employeeinfo.html')
 
 def employee_list(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'emp_list.html')
+    EmployeeInfo = Employee_info.objects.all()
+    return render(request, 'emp_list.html', {'employee_info':EmployeeInfo})
+
+
+def branch_page(request, BranchId):
+    EmpBranch = Employee_info.objects.get(id=BranchId)
+    #salaries = Employee_Salary.objects.filter(employee_info=EmpSalaryId)
+    return render(request, 'BranchSelect.html', {'empbranch': EmpBranch})
+
+def branch_add(request, BranchId):
+    EmpBranch = Employee_info.objects.get(id=BranchId)
+    Branch.objects.create(Company_branch=request.POST['branch'],Department=request.POST['department'],Position=request.POST['posit'], employee_branch=EmpBranch)
+    return redirect('/')
+
+
 
 def comp_report(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'company_report.html')
+    EmployeeInfo = Employee_info.objects.all()
+    return render(request, 'company_report.html', {'employee_info':EmployeeInfo})
 
-def comp_report_indv(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'creport_indv.html')
+
+def comp_report_indv(request, ComReportId):
+    CompanyRep = Employee_info.objects.get(id=ComReportId)
+    branch = Branch.objects.get(employee_branch=ComReportId)
+    Report = Company_report.objects.filter(employee_comrep=ComReportId)
+    return render(request, 'creport_indv.html', {'companyreport':CompanyRep, 'Report': Report, 'branch': branch})
+
+def comp_report_add(request, ComReportId):
+    CompanyRep = Employee_info.objects.get(id=ComReportId)
+    Company_report.objects.create(Companyreport=request.POST['comreport'],Company_comment=request.POST['comcomment'],Comreport_date=request.POST['creportdate'], employee_comrep=CompanyRep)
+   
+    return redirect(f'/CEList/comrep/{CompanyRep.id}/')
+
+
 
 def emp_report(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'employee_report.html')
+    EmployeeInfo = Employee_info.objects.all()
+    return render(request, 'employee_report.html', {'employee_info':EmployeeInfo})
 
-def emp_report_indv(request):
-    #cusId = Customers_Profile.objects.get(id=cId)
-    return render(request, 'empreportindv.html')
+def emp_report_indv(request, IndvReportId):
+    EmployeeRep = Employee_info.objects.get(id=IndvReportId)
+    branch = Branch.objects.get(employee_branch=IndvReportId)
+    Report = Employee_report.objects.filter(employee_emrep=IndvReportId)
+    return render(request, 'empreportindv.html', {'indvreport':EmployeeRep, 'Report': Report, 'branch': branch})
 
+def emp_report_add(request, IndvReportId):
+    EmployeeRep = Employee_info.objects.get(id=IndvReportId)
+    Employee_report.objects.create(Employeereport=request.POST['Empreport'],Employee_comment=request.POST['Empcomment'],Empreport_date=request.POST['emreport_date'], employee_emrep=EmployeeRep)
+   
+    return redirect(f'/CEList/indvrepor/{EmployeeRep.id}/')
 
-
-
-'''
-def defaultEntry(request):
-	#Creating data
-	customer = Customers_Profile(customers_name="Cesar Talibong", address="B. 28 L. 71 Viva Homes", book_date="05/15/2021" )
-	customer = Customers_Profile(customers_name="Raymond Loon", address="B. 21 L. 15 Dexterville", book_date="05/13/2021" )
-	customer.save()
-
-	#Read all data
-	customers = Customers_Profile.objects.all()
-	result = 'Printing all customers list : <br>'
-	for x in customers:
-		res += X.customers_name+"<br>"
-
-	#Read one data
-	cusname = Customers_Profile.get(id="19")
-	res += "Printing one customer profile : <br>"
-	res += cusname.address
-
-	#Delete data
-	res+= '<br> Deletinng... <br>'
-	cusname.delete()
-
-	#Update/Creating data
-	customer = Customers_Profile(customers_name="Ryan Balota", address="Avida Homes", book_date="05/15/2021")
-	customer.save()
-	res += 'Updating...<br>'
-
-	#Update data
-	customer = Customers_Profile.objects.get(customers_name="Raymond Loon")
-	customer.venue = "Orchard golf and country club"
-	customer.save()
-	res = ""
-
-	#Filtering data
-	qs = Booking.objects.filter(customers_name="Raymond Loon")
-	res += "found : %s result<br>"%len(qs)
-
-	#ordering data
-	qs = Customers_Profile.objects.order_by("book_date")
-	for x in qs: 
-		res += x.customers_name + x.address + '<br>'
+def emp_personal(request, ID):
+    EmployeeInfo = Employee_info.objects.get(id=ID)
+    branch = Branch.objects.get(employee_branch=ID)
+    return render(request, 'EmpPerInfo.html', {'employee_info':EmployeeInfo, 'branch': branch})
 
 
 
+def updateEmployee(request, updateId):
+	Employupdate = Employee_info.objects.get(id=updateId)
+	branch = Branch.objects.get(employee_branch=updateId)
 
-'''
+	#if request.method == "POST":
+		#Empupdate = Employee_info.objects.get(id=updateId)
+		
+		#Employee_info.objects.update(Name=request.POST['name'],Contact_No=request.POST['contact_num'],Emailaddress=request.POST['email_add'],Age=request.POST['age'],Address=request.POST['address'],Company_id=request.POST['comid'],Gender=request.POST['gender'])
+	    
+		#return redirect('/emplist')
+
+	return render(request, 'Employeeinfo.html', {'employee_info':Employupdate,  'branch': branch})
+
+
+def updateEmployeeEdit(request, updateId):
+	Employupdate = Employee_info.objects.get(id=updateId)
+
+	Employupdate.Name = request.POST['name']	
+	Employupdate.Contact_No = request.POST['contact_num']
+	Employupdate.Emailaddress = request.POST['email_add']
+	Employupdate.Age = request.POST['age']
+	Employupdate.Address = request.POST['address']
+	Employupdate.Company_id = request.POST['comid']
+	Employupdate.Gender = request.POST['gender']
+	Employupdate.save()
+
+	return redirect('/emplist')
+
+
+def deleteEmployee(request, deleteId):
+	Empdelete = Employee_info.objects.get(id=deleteId)
+
+	if request.method == "POST":
+		Empdelete.delete()
+		return redirect('/emplist')
+	return render(request, 'emp_delete.html', {'employee_info':Empdelete})
+
+
+
+
+

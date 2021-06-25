@@ -54,7 +54,6 @@ body{
     1px 25px 35px rgba(16,16,16,0.2);
 
 }
-
 .head h5{
   color: #034486;
 }
@@ -69,14 +68,7 @@ button {
         font-size: 20px;
         }
 
- button{
-    background-color: #063247;
-    color: white;
-    }
-button:hover { 
-    color: lightblue;
-    transition:.50s all ease;
-    }  
+ } 
 td{
     padding: 12px;
     text-align: left;
@@ -92,7 +84,9 @@ td{
         border: 1px solid rgb(3, 3, 3); 
         box-sizing: border-box; 
     }
-
+ button:hover { 
+        background-color: gray;
+    } 
 
     nav{
     position: relative;
@@ -195,6 +189,7 @@ nav ul ul li a i{
 }
 
 .btnsub{
+  color: blueviolet;
 
 }
 .btnsub submit{
@@ -209,16 +204,26 @@ input[type="checkbox"]{
 }
 .container{
   background: #fff;
-  width: 60%;
   padding: 40px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   margin-top: 100px;
   box-shadow: 10px 20px 20px rgba(0,0,0,0.5);
-  width: 50%;
-  margin-left:21%;
+  width: 70%;
+  margin-left:12%;
+}
+
+.container table{
+  width: 100%;
+    border: 3px solid;
 
 }
 
+.container th,td{
+  margin: auto;
+  padding: 20px;
+  border: 2px solid;
+
+}
 
 
 #show:checked ~ .container{
@@ -311,13 +316,7 @@ form .btn button{
   letter-spacing: 1px;
   cursor: pointer;
 }
-.btnsub{
-  text-align: right;
-  }
-
  </style>
-
-
 </style> 
 
 
@@ -332,7 +331,7 @@ form .btn button{
                <ul>
                   <li><a href="/emplist">Employee Status</a></li>
                   <li><a href="/paylist">Salary base</a></li>
-                  <li><a href="/emprep">Employee report</a></li>
+                  <li><a href="#">Employee report</a></li>
                </ul>
             </li>
             <li>
@@ -344,19 +343,25 @@ form .btn button{
                   <li><a href="/report">Company report</a></li>
                   <li>
                      <a href="#">Others
-
+                     <i class="t"></i>
+                     </a>
+                     <ul>
+                        <li><a href="#">Links</a></li>
+                        <li><a href="#">Works</a></li>
+                        <li><a href="#">Status</a></li>
+                     </ul>
                   </li>
                </ul>
             </li>
             <li>
                <a href="#">About
-               <i class=""></i>
+               <i class="fas fa-caret-down"></i>
                </a>
             </li>
             <li>
-              
+              <
             </li>
-
+>
          </ul>
       </nav>
 </head>  
@@ -367,90 +372,24 @@ form .btn button{
 
 
          <div class="container">
-
-            <div class="text">
-               <h3>Employee info</h3>
-            </div>
-            Name: {{employee_info.Name.upper}} <br><br>
-            Company Id: {{employee_info.Company_id.upper}} <br><br>
-            Department: {{branch.Department.upper}} <br><br> 
-            Position: {{branch.Position.upper}} <br><br>    
-            <form action="/CEList/empupdate/{{employee_info.id}}/update_add" method="POST">
-              {% csrf_token %}
-              <div class='merge'>
-
-              <label>Name </label> 
-            <input 
-            type="text" 
-            id="name" 
-            placeholder="Enter your fullname" 
-            name="name"><br>
-
-
-            <label>Contact number </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
-            placeholder="Enter your contact number" 
-            name="contact_num"><br>
-
-            <label>Email address </label> 
-            <input 
-            type="text" 
-            id="email_add" 
-            placeholder="Enter your email address" 
-            name="email_add"><br>
-
             
-            <label>Age</label> 
-            <input 
-            type="text" 
-            id="age" 
-            placeholder="Enter your department" 
-            name="age"><br>
+        
+            Are you sure you wanted to delete {{employee_info.Name}}?
 
-            <label>Address </label> 
-            <input 
-            type="text" 
-            id="address" 
-            placeholder="Enter your department" 
-            name="address"><br>
+          <form action="{% url 'deleteEmployee' employee_info.id %}" method="POST">
+            {% csrf_token %}  
 
-            <label>Company ID </label> 
-            <input 
-            type="text" 
-            id="comid" 
-            placeholder="Enter your department" 
-            name="comid"><br>
 
-            <label>Gender</label> 
-            <br><br>
-            <input 
-            type="radio" 
-            id="gender" 
-            value="Male" 
-            name="gender">Male
-            <br><br>
-            <input 
-            type="radio" 
-            id="gender" 
-            value="Female" 
-            name="gender">Female
+          <a href=/CEList/emplist>Cancel</a>
+          <input type="submit" name="Confirm" value="Confirm">  
 
-            <br><br><br>
 
-               
-            <button type="submit">Submit</button>
-                          </div>
           </form>
-             </div>
 
-
- 
-
-            </form>
-         </div>
+           
+        
       </div>
+
    </body>
    <script>
        var date = new Date();

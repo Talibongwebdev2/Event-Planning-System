@@ -1,5 +1,6 @@
 from django.db import models
 
+
 DEPARTMENT_CHOICES = (
     ("Operations" , "operations"),
     ("Quality Assurance" , "QA"),
@@ -22,46 +23,54 @@ GEN_CHOICES =(
 
 
 class Employee_info(models.Model):
-    Name = models.TextField(default='')
-    Age = models.TextField(default='')
-    Gender = models.TextField( choices = GEN_CHOICES, default='')
-    Address = models.TextField(default='')
-    Birthdate = models.DateTimeField(default='')
-    Contact_No = models.TextField(default='')
-    Emailaddress = models.TextField(default='')
-    Company_id = models.TextField(default='')
+    Name = models.CharField(max_length=30)
+    Age = models.CharField(max_length=3)
+    Address = models.CharField(max_length=50)
+    Contact_No = models.CharField(max_length=20)
+    Emailaddress = models.CharField(max_length=30)
+    Company_id = models.CharField(max_length=10)
+    Gender = models.CharField(max_length=10, choices = GEN_CHOICES)
+    
+    def __str__(self):
+        return self.Name
   
 class Employee_Salary(models.Model):
     employee_info = models.ForeignKey(Employee_info, default=None, on_delete=models.CASCADE)
     Days = models.TextField(default='')
     Rate = models.TextField(default='')
     Deduction = models.TextField(default='')
-    Status = models.TextField(default='')
+    Total = models.TextField(default='')
     Date_time = models.DateTimeField(default='')
+
+    def __str__(self):
+        return self.Date_time
     
 class Branch(models.Model): 
-    employee_info = models.ManyToManyField(Employee_info, default=None)
+    employee_branch = models.OneToOneField(Employee_info, default=None, on_delete=models.CASCADE)
     Company_branch = models.CharField(max_length = 20, choices = BRANCH_CHOICES, default ="")
-    Company_address = models.TextField(default='')
-
-
-class Department(models.Model):
-    employee_info = models.ManyToManyField(Employee_info, default=None)
     Department = models.CharField(max_length = 20, choices = DEPARTMENT_CHOICES, default ="")
-    Dep_status = models.TextField(default='')
     Position = models.TextField(default='')
 
+    def __str__(self):
+        return self.Company_branch
+
 class Company_report(models.Model):
-    employee_info = models.ForeignKey(Employee_Salary, default=None, on_delete=models.CASCADE)
+    employee_comrep = models.ForeignKey(Employee_info, default=None, on_delete=models.CASCADE)
     Companyreport = models.TextField(default='')
     Company_comment = models.TextField(default='')
     Comreport_date = models.DateTimeField(default='')
 
+    def __str__(self):
+        return str(self.Comreport_date)
+
 
 class Employee_report(models.Model):
-    employee_info = models.ForeignKey(Employee_info, default=None, on_delete=models.CASCADE)
+    employee_emrep = models.ForeignKey(Employee_info, default=None, on_delete=models.CASCADE)
     Employeereport = models.TextField(default='')
     Employee_comment = models.TextField(default='')
     Company_rating = models.TextField(default='')
     Empreport_date = models.DateTimeField(default='')
+
+    def __str__(self):
+        return str(self.Empreport_date)
 

@@ -388,7 +388,7 @@ form .btn button{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -424,7 +424,7 @@ form .btn button{
          </ul>
       </nav>
 </head>  
-   <body style="background-image:url('{% static "image/1.jpg"%}');">
+      <body style="background-image:url(https://www.intheblack.com/-/media/intheblack/allimages/sponsored-content/2018/dexus-office-space.jpg?rev=835b5eb0fcd5481b960b7abfeec3eed2);">
 
       <div class="center">
 
@@ -436,13 +436,15 @@ form .btn button{
                <h3>Employee report</h3>
             </div>
 
-            Name:<br><br>
-            Company Id:<br><br>
-            Department:<br><br>
-            <form action="#">
-
-            <div class="bigtxt">
-              <label>Employee Report </label> <br>
+            Name: {{indvreport.Name.upper}} <br><br>
+            Company Id: {{indvreport.Company_id.upper}} <br><br>
+            Department: {{branch.Department.upper}} <br><br> 
+            Position: {{branch.Position.upper}} <br><br>      
+ 
+            <form action="/CEList/indvrepor/{{indvreport.id}}/emprep_add" method="POST">
+            {% csrf_token %}   
+           
+            <label>Employee Report </label> <br>
 
             <textarea 
             name="Empreport" 
@@ -463,26 +465,15 @@ form .btn button{
             placeholder="Enter the company comment"></textarea><br><br>
 
            
-            Department Status
-            <div class="select">
-              <select name="depstatus" id="depstatus">
-              <option selected disabled="">Select here</option>
-              <option value="Very good">Very good</option>
-              <option value="Good">Good</option>
-              <option value="Fair">Fair</option>
-              <option value="Bad">Bad</option>
-              <option value="Very bad">Very bad</option>
-
-              </select>
-            </div>
+          
             <br>
             
             <label>Date <br></label> 
             <input 
             type="date" id="date-set" 
-            id="creport_date" 
+            id="emreport_date" 
             placeholder="Date" 
-            name="creport_date"><br>
+            name="emreport_date"><br>
             <br>
 
 
@@ -493,31 +484,29 @@ form .btn button{
             <br>
             <button type="submit">Submit</button>
             </div>
+
+          </form>
             <br><br>
 
         <h3>Employee report history</h3>
 
-            <table id="empreptable" name=tr>
+            <table id="Salaryltable" name=tr>
 
         <tr>
         <th>Date</th>
-        <th>Employee report</th>
-        <th>Employee comment</th>
-        <th>Employee rating</th>
+        <th>Employee Report</th>
+        <th>Employee Comment</th>
 
-        <tr>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
+        {% for Rep in Report %}
+        <tr> 
 
-        </tr>
-         <tr>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
+        <td>{{Rep.Empreport_date}}</td>
+        <td>{{Rep.Employeereport}}</td>
+        <td>{{Rep.Employee_comment}}</td>
+
+        </tr> {% endfor %}
+      </tr>
+    </table>
 
 
             <form action="#">

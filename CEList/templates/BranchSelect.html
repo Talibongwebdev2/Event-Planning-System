@@ -369,80 +369,62 @@ form .btn button{
          <div class="container">
 
             <div class="text">
-               <h3>Employee info</h3>
+               <h3>Branch Select</h3>
             </div>
-            Name: {{employee_info.Name.upper}} <br><br>
-            Company Id: {{employee_info.Company_id.upper}} <br><br>
-            Department: {{branch.Department.upper}} <br><br> 
-            Position: {{branch.Position.upper}} <br><br>    
-            <form action="/CEList/empupdate/{{employee_info.id}}/update_add" method="POST">
-              {% csrf_token %}
+            Name: {{empbranch.Name.upper}} <br><br>
+            Company Id: {{empbranch.Company_id.upper}} <br><br>
+            Contact Number: {{empbranch.Contact_No.upper}} <br><br>     
+             <form action="/CEList/branch/{{empbranch.id}}/branch_add" method="POST">
+              {% csrf_token %}  
               <div class='merge'>
 
-              <label>Name </label> 
-            <input 
-            type="text" 
-            id="name" 
-            placeholder="Enter your fullname" 
-            name="name"><br>
+            Company Branch   <br>     
+            <div class="select">
+              <select name="branch" id="branch">
+              <option selected disabled="">Select here</option>
+              <option value="Cavite">Cavite</option>
+              <option value="Manila">Manila</option>
+              <option value="Caloocan">Caloocan</option>
+              <option value="Taguig">Taguig</option>
+
+              </select>
+            </div>
+
+ <br>
+            Department <br>
+            <div class="select">
+              <select name="department" id="department">
+              <option selected disabled="">Select here</option>
+              <option value="Operations">Operations</option>
+              <option value="Quality Assurance">Quality Assurance</option>
+              <option value="Human Resource">Human Resource</option>
+              <option value="Administration">Administration</option>
+              <option value="Training">Training</option>
+
+              </select>
+            </div>
+            <br> 
+            <label>Position</label>  <br>
+            <div class="select">
+              <select name="posit" id="posit">
+                <option selected disabled="">Select here</option>
+                <option value="Call Centre Agent">Call Centre Agent</option>
+                <option value="Customer Services Director">Customer Services Director</option>
+                <option value="Human Resources">Human Resources</option>
+                <option value="Trainer">Trainer</option>
+                <option value="Quality Analyst">Quality Analyst</option>
+              </select>
 
 
-            <label>Contact number </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
-            placeholder="Enter your contact number" 
-            name="contact_num"><br>
-
-            <label>Email address </label> 
-            <input 
-            type="text" 
-            id="email_add" 
-            placeholder="Enter your email address" 
-            name="email_add"><br>
+           
 
             
-            <label>Age</label> 
-            <input 
-            type="text" 
-            id="age" 
-            placeholder="Enter your department" 
-            name="age"><br>
+          
+            <br>
 
-            <label>Address </label> 
-            <input 
-            type="text" 
-            id="address" 
-            placeholder="Enter your department" 
-            name="address"><br>
-
-            <label>Company ID </label> 
-            <input 
-            type="text" 
-            id="comid" 
-            placeholder="Enter your department" 
-            name="comid"><br>
-
-            <label>Gender</label> 
-            <br><br>
-            <input 
-            type="radio" 
-            id="gender" 
-            value="Male" 
-            name="gender">Male
-            <br><br>
-            <input 
-            type="radio" 
-            id="gender" 
-            value="Female" 
-            name="gender">Female
-
-            <br><br><br>
-
-               
+            <div class="btnsub">
             <button type="submit">Submit</button>
-                          </div>
-          </form>
+            </div>
              </div>
 
 

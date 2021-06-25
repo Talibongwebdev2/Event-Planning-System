@@ -323,7 +323,7 @@ form .btn button{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -376,7 +376,7 @@ form .btn button{
             <div class="text">
                <h3>Employee List</h3>
             </div>
-            Select an employee to add/update their personal info. Click the ID of the selected employee to proceed.
+            Select an employee to see their personal info and branch information. Click the ID of the selected employee to proceed. 
 
             <form action="#">
 
@@ -384,32 +384,24 @@ form .btn button{
 
             <table id="Empltable" name=tr>
 
-        <tr>
-        <th>ID</th>
+        <tr> 
+        <th>Company ID</th>
         <th>Name</th>
-        <th>Company Id</th>
-        <th>Department</th>
+        <th>Contact number</th>
+      </tr>
 
-        <tr>
-        <td><a href="/employee">1</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
+       {% for emp in employee_info %}
+        <tr> 
+        <td><a href=/CEList/empinfo/{{emp.id}}>{{emp.Company_id.upper}}</a></td>
+        <td>{{emp.Name.upper}}</td>
+        <td>{{emp.Contact_No.upper}}</td>
+        <td><a href=/CEList/empupdate/{{emp.id}}>UPDATE</a></td>
+        <td><a href=/CEList/empdelete/{{emp.id}}>DELETE</a></td>
 
-        </tr>
-         <tr>
-        <td><a href="/employee">2</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
-         <tr>
-        <td><a href="/employee">3</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
- 
+        </tr> {% endfor %}
+      </table>
+
+
 
             </form>
          </div>

@@ -206,8 +206,10 @@ input[type="checkbox"]{
   width: 60%;
   padding: 40px;
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  margin-top: 100px;
-  box-shadow: 10px 20px 20px rgba(0,0,0,0.5)
+  margin-top: 12%;
+  box-shadow: 10px 20px 20px rgba(0,0,0,0.5);
+
+
 
 }
 #show:checked ~ .container{
@@ -250,6 +252,9 @@ input[type="checkbox"]{
   height: 45px;
   width: 100%;
   margin: 40px 0;
+}
+form{
+  white-space: 10px;
 }
 form .data label{
   font-size: 18px;
@@ -317,7 +322,7 @@ form .btn button:hover{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -353,7 +358,9 @@ form .btn button:hover{
          </ul>
       </nav>
 </head>  
-   <body style="background-image:url('{% static "image/1.jpg"%}');">
+   <body style="background-image:url(https://www.intheblack.com/-/media/intheblack/allimages/sponsored-content/2018/dexus-office-space.jpg?rev=835b5eb0fcd5481b960b7abfeec3eed2);">
+
+    
 
       <div class="center">
          <input type="checkbox" id="show">
@@ -365,16 +372,22 @@ form .btn button:hover{
 
          <div class="container">
             <label for="show" class="close-btn fas fa-times" title="close">&#x2715;</label>
+
+            
+            
             <div class="text">
                <h3>New employee</h3>
             </div>
-            <form action="#">
+            <form action="CEList/new_employee" method="POST">
+              {% csrf_token %}
+             
+         
                <label>Name </label> 
             <input 
             type="text" 
-            id="custom_name" 
+            id="name" 
             placeholder="Enter your fullname" 
-            name="Enter the name"><br>
+            name="name"><br>
 
 
             <label>Contact number </label> 
@@ -387,24 +400,47 @@ form .btn button:hover{
             <label>Email address </label> 
             <input 
             type="text" 
-            id="contact_num" 
+            id="email_add" 
             placeholder="Enter your email address" 
-            name="contact_num"><br>
+            name="email_add"><br>
+
+            
+            <label>Age</label> 
+            <input 
+            type="text" 
+            id="age" 
+            placeholder="Enter your department" 
+            name="age"><br>
+
+            <label>Address </label> 
+            <input 
+            type="text" 
+            id="address" 
+            placeholder="Enter your department" 
+            name="address"><br>
 
             <label>Company ID </label> 
             <input 
             type="text" 
-            id="contact_num" 
-            placeholder="Enter your company ID" 
-            name="contact_num"><br>
-            
-            <label>Department </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
+            id="comid" 
             placeholder="Enter your department" 
-            name="contact_num"><br>
+            name="comid"><br>
 
+            <label>Gender</label> 
+            <br><br>
+            <input 
+            type="radio" 
+            id="gender" 
+            value="Male" 
+            name="gender">Male
+            <br><br>
+            <input 
+            type="radio" 
+            id="gender" 
+            value="Female" 
+            name="gender">Female
+
+            <br><br><br>
 
                <div class="btn">
                   <div class="inner"></div>
@@ -412,9 +448,28 @@ form .btn button:hover{
                </div>
 
             </form>
+             
+
+              
+                  
+               </div>
+
+
+               
+        
+
+            
          </div>
       </div>
    </body>
+      <script>
+       var date = new Date();
+       var year = date.getFullYear();
+       var month = date.getMonth()+1;
+       var todayDate = String(date.getDate()).padStart(2,'0');
+       var datePattern = year + '-' + month + '-' + todayDate;
+       document.getElementById("date-set").value = datePattern;
+   </script>
 </html>
 
  

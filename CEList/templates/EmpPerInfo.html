@@ -371,81 +371,30 @@ form .btn button{
             <div class="text">
                <h3>Employee info</h3>
             </div>
-            Name: {{employee_info.Name.upper}} <br><br>
-            Company Id: {{employee_info.Company_id.upper}} <br><br>
-            Department: {{branch.Department.upper}} <br><br> 
-            Position: {{branch.Position.upper}} <br><br>    
-            <form action="/CEList/empupdate/{{employee_info.id}}/update_add" method="POST">
-              {% csrf_token %}
-              <div class='merge'>
+            Name: {{employee_info.Name}} <br><br>
+            Age: {{employee_info.Age}} <br><br>
+            Address: {{employee_info.Address}} <br><br>
+            Contact No.: {{employee_info.Contact_No}} <br><br>
+            Emailaddress: {{employee_info.Emailaddress}} <br><br>   
+            Company_id: {{employee_info.Company_id}} <br><br>   
+            Gender: {{employee_info.Gender}} <br><br>  
 
-              <label>Name </label> 
-            <input 
-            type="text" 
-            id="name" 
-            placeholder="Enter your fullname" 
-            name="name"><br>
+              <h4>Branch</h4>
 
-
-            <label>Contact number </label> 
-            <input 
-            type="text" 
-            id="contact_num" 
-            placeholder="Enter your contact number" 
-            name="contact_num"><br>
-
-            <label>Email address </label> 
-            <input 
-            type="text" 
-            id="email_add" 
-            placeholder="Enter your email address" 
-            name="email_add"><br>
-
+            Company branch: {{branch.Company_branch}} <br><br>
+            Department: {{branch.Department}} <br><br>
+            Position: {{branch.Position}} <br><br>
             
-            <label>Age</label> 
-            <input 
-            type="text" 
-            id="age" 
-            placeholder="Enter your department" 
-            name="age"><br>
 
-            <label>Address </label> 
-            <input 
-            type="text" 
-            id="address" 
-            placeholder="Enter your department" 
-            name="address"><br>
+             
 
-            <label>Company ID </label> 
-            <input 
-            type="text" 
-            id="comid" 
-            placeholder="Enter your department" 
-            name="comid"><br>
+             <form action="/emplist/" method="POST">
+              {% csrf_token %} 
+             <button type="submit">Back</button>
 
-            <label>Gender</label> 
-            <br><br>
-            <input 
-            type="radio" 
-            id="gender" 
-            value="Male" 
-            name="gender">Male
-            <br><br>
-            <input 
-            type="radio" 
-            id="gender" 
-            value="Female" 
-            name="gender">Female
+             </form>
 
-            <br><br><br>
-
-               
-            <button type="submit">Submit</button>
-                          </div>
-          </form>
              </div>
-
-
  
 
             </form>

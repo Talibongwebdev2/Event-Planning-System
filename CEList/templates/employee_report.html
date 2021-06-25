@@ -322,7 +322,7 @@ form .btn button{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -358,7 +358,7 @@ form .btn button{
          </ul>
       </nav>
 </head>  
-   <body style="background-image:url('{% static "image/1.jpg"%}');">
+      <body style="background-image:url(https://www.intheblack.com/-/media/intheblack/allimages/sponsored-content/2018/dexus-office-space.jpg?rev=835b5eb0fcd5481b960b7abfeec3eed2);">
 
       <div class="center">
 
@@ -370,38 +370,27 @@ form .btn button{
                <h3>Employee report</h3>
             </div>
             Employee can report to the company anything such us suggesting for company's improvement, reporting to hr, and etc.
-            To make a report to the company, please select your name below on the employee list.
+            To make a report to the company, please select the company id of the user below on the employee list.
             <form action="#">
 
 
-            <table id="creport" name=tr>
+            <table id="Empltable" name=tr>
 
-        <tr>
-        <th>ID</th>
+        <tr> 
+        <th>Company ID</th>
         <th>Name</th>
-        <th>Company Id</th>
-        <th>Department</th>
+        <th>Contact number</th>
+      </tr>
 
-        <tr>
-        <td><a href="/emprepindv">1</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
+       {% for employee_info in employee_info %}
+        <tr> 
 
-        </tr>
-         <tr>
-        <td><a href="/emprepindv">2</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
-         <tr>
-        <td><a href="/emprepindv">3</a></td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
-            <br>
+        <td><a href=/CEList/indvrepor/{{employee_info.id}}>{{employee_info.Company_id}}</a></td>
+        <td>{{employee_info.Name.upper}}</td>
+        <td>{{employee_info.Contact_No.upper}}</td>
+
+        </tr> {% endfor %}
+      </table>
 
         
          

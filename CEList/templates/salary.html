@@ -383,7 +383,7 @@ form .btn button{
 <nav>
          <label class="logo">CPS</label>
          <ul>
-            <li><a class="active" >Home</a></li>
+            <li><a class="active" href="/">Home</a></li>
             <li>
                <a href="#">Payroll
                <i class=""></i>
@@ -419,7 +419,7 @@ form .btn button{
          </ul>
       </nav>
 </head>  
-   <body style="background-image:url('{% static "image/1.jpg"%}');">
+      <body style="background-image:url(https://www.intheblack.com/-/media/intheblack/allimages/sponsored-content/2018/dexus-office-space.jpg?rev=835b5eb0fcd5481b960b7abfeec3eed2);">
 
       <div class="center">
 
@@ -432,22 +432,20 @@ form .btn button{
             <div class="text">
                <h3>Salary</h3>
             </div>
-            Name:<br><br>
-            Company Id:<br><br>
-            Department:<br><br>
-            <form action="#">
 
-            <label>Position</label> 
-            <div class="select">
-              <select name="posit" id="posit">
-                <option selected disabled="">Select here</option>
-                <option value="780">Call Centre Agent</option>
-                <option value="850">Customer Services Director</option>
-                <option value="800">Human Resources</option>
-                <option value="830">Trainer</option>
-                <option value="800">Quality Analyst</option>
-              </select>
-            </div><br>
+
+
+
+            Name: {{employee_info.Name.upper}} <br><br>
+            Company Id: {{employee_info.Company_id.upper}} <br><br>
+            Department: {{branch.Department.upper}} <br><br> 
+            Position: {{branch.Position.upper}} <br><br>      
+
+
+            <form action="/CEList/empsalary/{{employee_info.id}}/salary_add" method="POST"> 
+            {% csrf_token %}  
+   
+            <br>
 
 
             <label>Rate</label> 
@@ -455,18 +453,16 @@ form .btn button{
             type="text" 
             id="rate" 
             placeholder="Salary rate" 
-            name="custom_add">
+            name="rate">
 
 
-               <label>Days </label> 
+            <label>Days </label> 
             <input 
             type="text" 
             id="days" 
             placeholder="Days present" 
-            name="custom_name"><br>
+            name="days"><br>
 
-
-            
 
             <label>Deduction</label> 
             <input 
@@ -483,7 +479,7 @@ form .btn button{
             <div class="btnn">
             <button type="button" onclick="calc();">compute</button> </div><br>
             <label>Total Salary</label>
-        <input type="text" id="totalsalary"/>
+        <input type="text" name="total" id="totalsalary"/>
 
             
 
@@ -492,12 +488,14 @@ form .btn button{
             type="date" id="date-set" 
             id="creport_date" 
             placeholder="Date" 
-            name="creport_date"><br>
+            name="salarydate"><br>
             <br>
 
             <div class="btnsub">
             <button type="submit">Submit</button>
             </div>
+
+          </form>
             <br>
             <br>
             <br><br>
@@ -508,30 +506,24 @@ form .btn button{
         <table id="Salaryltable" name=tr>
 
         <tr>
-        <th>ID</th>
         <th>Date</th>
-        <th>Total Salary</th>
-        <th>Days present</th>
+        <th>Days</th>
+        <th>Deduction</th>
+        <th>Total</th>
 
-        <tr>
-        <td>1</td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
+        {% for salary in salaries %}
+        <tr> 
 
-        </tr>
-         <tr>
-        <td>2</td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
-         <tr>
-        <td>3</td>
-        <td>sample</td>
-        <td>sample</td>
-        <td>sample</td>
-        </tr>
+        <td>{{salary.Date_time}}</td>
+        <td>{{salary.Days}}</td>
+        <td>{{salary.Deduction}}</td>
+        <td>{{salary.Total}}</td>
+
+
+
+        </tr> {% endfor %}
+      </tr>
+    </table>
 
             </form>
          </div>
@@ -559,7 +551,6 @@ form .btn button{
                 var displaytext=d.options[d.selectedIndex].value;
                 document.getElementById("rate").value=displaytext;
                 }
-
    </script>
 </html>
 
