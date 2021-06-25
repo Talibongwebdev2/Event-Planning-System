@@ -68,7 +68,6 @@ class Employee_report(models.Model):
     employee_emrep = models.ForeignKey(Employee_info, default=None, on_delete=models.CASCADE)
     Employeereport = models.TextField(default='')
     Employee_comment = models.TextField(default='')
-    Company_rating = models.TextField(default='')
     Empreport_date = models.DateTimeField(default='')
 
     def __str__(self):
